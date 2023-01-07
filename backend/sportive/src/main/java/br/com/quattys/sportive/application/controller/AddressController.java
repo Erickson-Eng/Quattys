@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.net.URI;
 
 @RestController
@@ -20,7 +21,7 @@ public class AddressController {
     private AddressService addressService;
 
     @PostMapping
-    public ResponseEntity<AddressResponse> saveAddress(@RequestBody AddressRequest addressRequest){
+    public ResponseEntity<AddressResponse> saveAddress(@Valid @RequestBody AddressRequest addressRequest){
         AddressResponse addressResponse = addressService.saveAddress(addressRequest);
         URI uri = URI.create(addressResponse.getExternalId());
         return ResponseEntity.created(uri).body(addressResponse);

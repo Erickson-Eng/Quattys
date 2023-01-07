@@ -14,19 +14,19 @@ import javax.validation.constraints.NotNull;
 @AllArgsConstructor
 public class AddressRequest {
 
-    @NotBlank
+    @NotBlank(message = "É necessário informar o nome da rua")
     private String street;
     private String complement;
 
-    @NotNull
+    @NotNull(message = "É necessário informar o número da casa ou predio")
     private String number;
 
-    @NotNull
+    @NotNull(message = "É necessário informar a cidade")
     private String city;
 
-    @NotNull
+    @NotNull(message = "É necessário informar o estado")
     private String state;
 
-    @NotNull
+    @NotNull(message = "É necessário informar o cep")
     private String zipCode;
 }

@@ -17,6 +17,10 @@ import java.util.UUID;
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public abstract class Profile implements Serializable {
     private static final long serialVersionUID = 410012683809180040L;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id", nullable = false)
     private Long id;
     @Column(nullable = false)
     private String fullName;
@@ -33,11 +37,14 @@ public abstract class Profile implements Serializable {
     @OneToOne(cascade = CascadeType.REFRESH, optional = false, orphanRemoval = true)
     @JoinColumn(nullable = false)
     private Address address;
-    @Id
-    @GeneratedValue(strategy = GenerationType.TABLE)
-    @Column(name = "id", nullable = false)
-    public Long getId() {
-        return id;
+
+    protected Profile(String fullName, String socialName,
+                      LocalDate birthDate, String cpf, Address address) {
+        this.fullName = fullName;
+        this.socialName = socialName;
+        this.birthDate = birthDate;
+        this.cpf = cpf;
+        this.address = address;
     }
 
     @PrePersist

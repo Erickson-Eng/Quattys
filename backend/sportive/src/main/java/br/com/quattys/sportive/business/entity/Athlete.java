@@ -3,9 +3,10 @@ package br.com.quattys.sportive.business.entity;
 import lombok.*;
 import org.hibernate.Hibernate;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Objects;
+import java.util.UUID;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -23,6 +24,11 @@ public class Athlete extends Profile {
     private Double chestMeasurement;
     private Double thighMeasurement;
     private Double calfMeasurement;
+
+
+    public Athlete(String fullName, String socialName, LocalDate birthDate, String cpf, Address address) {
+        super(fullName, socialName, birthDate, cpf, address);
+    }
 
     @Override
     public boolean equals(Object o) {

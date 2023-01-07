@@ -10,12 +10,10 @@ import br.com.quattys.sportive.business.service.AddressService;
 import br.com.quattys.sportive.business.service.exception.DatabaseViolationException;
 import br.com.quattys.sportive.business.service.exception.EntityNotFoundException;
 import br.com.quattys.sportive.resource.repository.AddressRepository;
-import br.com.quattys.sportive.resource.repository.AthleteRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.Transient;
@@ -26,7 +24,7 @@ import java.util.stream.Collectors;
 @Slf4j
 @Service
 @AllArgsConstructor(onConstructor = @__(@Autowired))
-public class AddressServicePostgreSQL implements AddressService {
+public class AddressServicePostgresql implements AddressService {
     private AddressRepository addressRepository;
     private AddressMapper addressMapper;
 
@@ -39,7 +37,7 @@ public class AddressServicePostgreSQL implements AddressService {
 
             return addressMapper.addressToResponse(entity);
         } catch (DataIntegrityViolationException e){
-            throw new DatabaseViolationException("Database error", HttpStatus.SERVICE_UNAVAILABLE);
+            throw new DatabaseViolationException("Database error");
         }
     }
 
@@ -108,12 +106,12 @@ public class AddressServicePostgreSQL implements AddressService {
 
     private Address verifyIfExist(Long id){
         return addressRepository.findById(id).
-                orElseThrow(() -> new EntityNotFoundException("Address not registered", HttpStatus.NOT_FOUND));
+                orElseThrow(() -> new EntityNotFoundException("Address not registered"));
     }
 
     private Address verifyIfExist(String externalId){
         UUID uuid = UUID.fromString(externalId);
         return addressRepository.findAddressByExternalId(uuid)
-                .orElseThrow(() -> new EntityNotFoundException("Address not registered", HttpStatus.NOT_FOUND));
+                .orElseThrow(() -> new EntityNotFoundException("Address not registered"));
     }
 }
