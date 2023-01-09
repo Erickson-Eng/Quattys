@@ -12,7 +12,6 @@ public interface AddressMapper {
 
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "externalId", ignore = true)
-
     Address requestToAddress(AddressRequest addressRequest);
 
     AddressResponse addressToResponse(Address address);
