@@ -16,6 +16,7 @@ import java.net.URI;
 @RestController
 @RequestMapping("/sportive/api/v1/address")
 @AllArgsConstructor(onConstructor = @__(@Autowired))
+@CrossOrigin(origins = "http://localhost:4200")
 public class AddressController {
 
     private AddressService addressService;

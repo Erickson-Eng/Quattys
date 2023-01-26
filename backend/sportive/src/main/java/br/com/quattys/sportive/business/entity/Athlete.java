@@ -6,7 +6,7 @@ import org.hibernate.Hibernate;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Objects;
-import java.util.UUID;
+import java.util.Set;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -25,6 +25,8 @@ public class Athlete extends Profile {
     private Double thighMeasurement;
     private Double calfMeasurement;
 
+    @OneToMany(mappedBy = "athlete")
+    private Set<Membership> membership;
 
     public Athlete(String fullName, String socialName, LocalDate birthDate, String cpf, Address address) {
         super(fullName, socialName, birthDate, cpf, address);
