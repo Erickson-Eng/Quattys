@@ -28,8 +28,6 @@ public class Team implements Serializable {
 
     @Column(columnDefinition = "TEXT")
     private String description;
-    @OneToOne(cascade = {CascadeType.REFRESH, CascadeType.DETACH})
-    private Athlete owner;
     @Column(name = "external_id",
             columnDefinition = "uuid",
             unique = true, updatable = false)

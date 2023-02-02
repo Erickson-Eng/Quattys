@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/Quattys.iml" filepath="$PROJECT_DIR$/.idea/Quattys.iml" />
+      <module fileurl="file://$PROJECT_DIR$/backend/backend.iml" filepath="$PROJECT_DIR$/backend/backend.iml" />
+      <module fileurl="file://$PROJECT_DIR$/backend/gateway/gateway.iml" filepath="$PROJECT_DIR$/backend/gateway/gateway.iml" />
+      <module fileurl="file://$PROJECT_DIR$/backend/manager/manager.iml" filepath="$PROJECT_DIR$/backend/manager/manager.iml" />
+      <module fileurl="file://$PROJECT_DIR$/backend/registry/registry.iml" filepath="$PROJECT_DIR$/backend/registry/registry.iml" />
+      <module fileurl="file://$PROJECT_DIR$/backend/sportive/sportive.iml" filepath="$PROJECT_DIR$/backend/sportive/sportive.iml" />
+    </modules>
+  </component>
+</project>
