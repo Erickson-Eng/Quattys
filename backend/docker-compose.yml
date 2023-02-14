@@ -1,15 +1,60 @@
-version: '3.8'
+version: '3'
 services:
-  db:
-    image: postgres:14.1-alpine
-    restart: always
-    environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
+  registry:
+    container_name: registry
+    image: registry:latest
+    build:
+      context: registry
+      dockerfile: Dockerfile
     ports:
-      - '5432:5432'
-    volumes:
-      - db:/var/lib/postgresql/data
-volumes:
-  db:
-    driver: local
+      - "8761:8761"
+    networks:
+      - test-local
+  sportive:
+    container_name: sportive
+    image: sportive:latest
+    build:
+      context: sportive
+      dockerfile: Dockerfile
+    networks:
+      - test-local
+    depends_on:
+      - registry
+    environment:
+      - EUREKA_SERVER=registry
+
+
+  manager:
+    container_name: manager
+    image: manager:latest
+    build:
+      context: manager
+      dockerfile: Dockerfile
+    networks:
+      - test-local
+    depends_on:
+      - registry
+    environment:
+      - EUREKA_SERVER=registry
+
+
+  gateway:
+    container_name: gateway
+    image: gateway:latest
+    build:
+      context: gateway
+      dockerfile: Dockerfile
+    networks:
+      - test-local
+    ports:
+      - "8888:8888"
+    depends_on:
+      - registry
+      - sportive
+      - manager
+    environment:
+      - EUREKA_SERVER=registry
+
+networks:
+  test-local:
+    external: true
