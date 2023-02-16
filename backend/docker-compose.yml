@@ -1,0 +1,93 @@
+version: '3'
+services:
+  registry:
+    container_name: registry
+    image: registry:latest
+    build:
+      context: registry
+      dockerfile: Dockerfile
+    ports:
+      - "8761:8761"
+    networks:
+      - test-local
+  sportive:
+    container_name: sportive
+    image: sportive:latest
+    build:
+      context: sportive
+      dockerfile: Dockerfile
+    networks:
+      - test-local
+    depends_on:
+      - registry
+      - db_sportive
+    environment:
+      - EUREKA_SERVER=registry
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db_sportive:5432/sportive?currentSchema=public
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=postgres
+
+  db_sportive:
+    image: postgres:14
+    container_name: db_sportive
+    restart: unless-stopped
+    networks:
+      - test-local
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=sportive
+
+  manager:
+    container_name: manager
+    image: manager:latest
+    build:
+      context: manager
+      dockerfile: Dockerfile
+    networks:
+      - test-local
+    depends_on:
+      - registry
+      - db_manager
+    environment:
+      - EUREKA_SERVER=registry
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db_manager:5432/manager?currentSchema=public
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=postgres
+
+
+  db_manager:
+    image: postgres:14
+    container_name: db_manager
+    restart: unless-stopped
+    networks:
+      - test-local
+    ports:
+      - "5433:5432"
+    environment:
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=manager
+
+  gateway:
+    container_name: gateway
+    image: gateway:latest
+    build:
+      context: gateway
+      dockerfile: Dockerfile
+    networks:
+      - test-local
+    ports:
+      - "8888:8888"
+    depends_on:
+      - registry
+      - sportive
+      - manager
+    environment:
+      - EUREKA_SERVER=registry
+
+networks:
+  test-local:
+    external: true

@@ -36,6 +36,7 @@ public class Membership implements Serializable {
     private TeamProfile profile;
 
     @Enumerated(EnumType.STRING)
+    @Column(name = "status")
     private RegistrationStatus registrationStatus;
 
 
