@@ -12,11 +12,8 @@ public interface TeamMapper {
 
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "externalId", ignore = true)
-    @Mapping(target = "owner.id", source = "athleteId")
     Team requestToTeam(TeamRequest teamRequest);
 
-    @Mapping(target = "ownerId", source = "owner.id")
-    @Mapping(target = "ownerSocialName", source = "owner.socialName")
     TeamResponse teamToResponse(Team team);
 
     @Mapping(target = "id", ignore = true)
