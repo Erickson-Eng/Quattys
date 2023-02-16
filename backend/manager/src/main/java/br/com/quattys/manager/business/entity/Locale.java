@@ -17,6 +17,10 @@ import java.util.UUID;
 @Table(name = "locale")
 public class Locale implements Serializable {
     private static final long serialVersionUID = 6285604628592634893L;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
     private Long id;
     @Column(nullable = false)
     private String street;
@@ -39,9 +43,7 @@ public class Locale implements Serializable {
     public void setExternalId() {
         this.externalId = UUID.randomUUID();
     }
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
+
     public Long getId() {
         return id;
     }

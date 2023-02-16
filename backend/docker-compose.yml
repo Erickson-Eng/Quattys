@@ -20,9 +20,25 @@ services:
       - test-local
     depends_on:
       - registry
+      - db_sportive
     environment:
       - EUREKA_SERVER=registry
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db_sportive:5432/sportive?currentSchema=public
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=postgres
 
+  db_sportive:
+    image: postgres:14
+    container_name: db_sportive
+    restart: unless-stopped
+    networks:
+      - test-local
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=sportive
 
   manager:
     container_name: manager
@@ -34,9 +50,26 @@ services:
       - test-local
     depends_on:
       - registry
+      - db_manager
     environment:
       - EUREKA_SERVER=registry
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db_manager:5432/manager?currentSchema=public
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=postgres
 
+
+  db_manager:
+    image: postgres:14
+    container_name: db_manager
+    restart: unless-stopped
+    networks:
+      - test-local
+    ports:
+      - "5433:5432"
+    environment:
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=manager
 
   gateway:
     container_name: gateway

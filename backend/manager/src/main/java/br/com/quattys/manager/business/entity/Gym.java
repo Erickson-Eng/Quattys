@@ -17,6 +17,10 @@ import java.util.UUID;
 @Table(name = "gym")
 public class Gym implements Serializable {
     private static final long serialVersionUID = 2055072481922792042L;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
     private Long id;
     private String name;
 
@@ -30,6 +34,7 @@ public class Gym implements Serializable {
     @Column(nullable = false)
     private GymAccess gymAccess;
 
+    @OneToMany(mappedBy = "gym")
     private Set<Practicable> practicableSet;
 
     @Column(name = "external_id",
@@ -42,19 +47,9 @@ public class Gym implements Serializable {
         this.externalId = UUID.randomUUID();
     }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
+
     public Long getId() {
         return id;
     }
 
-    @OneToMany
-    public Set<Practicable> getPracticableSet() {
-        return practicableSet;
-    }
-
-    public void setGymAccess(String gymAccess) {
-        this.gymAccess = GymAccess.valueOf(gymAccess);
-    }
 }
