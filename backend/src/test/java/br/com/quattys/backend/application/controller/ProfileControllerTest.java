@@ -4,6 +4,7 @@ import br.com.quattys.backend.application.dto.request.AddressRequest;
 import br.com.quattys.backend.application.dto.request.ProfileRequest;
 import br.com.quattys.backend.domain.entity.Address;
 import br.com.quattys.backend.domain.entity.Profile;
+import br.com.quattys.backend.domain.entity.User;
 import br.com.quattys.backend.infrastructure.persitence.ProfileRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Assertions;
@@ -20,6 +21,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import java.time.LocalDate;
 import java.util.Arrays;
+import java.util.UUID;
 
 
 @SpringBootTest

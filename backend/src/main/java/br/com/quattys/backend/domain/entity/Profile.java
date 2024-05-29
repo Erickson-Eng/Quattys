@@ -1,19 +1,17 @@
 package br.com.quattys.backend.domain.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDate;
 
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "profile")
-@AllArgsConstructor
-@NoArgsConstructor
 public class Profile {
 
     @Id
@@ -28,4 +26,16 @@ public class Profile {
     @OneToOne(cascade = {CascadeType.REFRESH, CascadeType.MERGE, CascadeType.PERSIST})
     private Address homeAddress;
 
+    @OneToOne(cascade = CascadeType.REFRESH, orphanRemoval = true)
+    @JsonIgnore
+    private User user;
+
+    public Profile(Long id, String name, LocalDate birthday, String gender, String cpf, Address homeAddress) {
+        this.id = id;
+        this.name = name;
+        this.birthday = birthday;
+        this.gender = gender;
+        this.cpf = cpf;
+        this.homeAddress = homeAddress;
+    }
 }

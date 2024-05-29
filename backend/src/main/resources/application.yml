@@ -19,3 +19,10 @@ spring:
     properties:
       hibernate:
         format_sql: true
+
+
+
+jwt:
+  key:
+    public: classpath:app.pub
+    private: classpath:app.key

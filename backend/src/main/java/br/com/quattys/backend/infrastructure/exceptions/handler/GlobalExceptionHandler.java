@@ -1,5 +1,6 @@
 package br.com.quattys.backend.infrastructure.exceptions.handler;
 
+import br.com.quattys.backend.infrastructure.exceptions.UserAlreadyExistsException;
 import br.com.quattys.backend.infrastructure.exceptions.message.ErrorDetails;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpHeaders;
@@ -17,7 +18,6 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
@@ -25,12 +25,23 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(DataIntegrityViolationException.class)
     public ResponseEntity<ErrorDetails> handleDataIntegrityViolationException(DataIntegrityViolationException ex) {
         List<String> errors = new ArrayList<>();
+        errors.add(ex.getMessage());
 
-        if (Objects.requireNonNull(ex.getRootCause()).getMessage() != null){
-            errors.add(ex.getMessage());
-        }
         ErrorDetails errorDetails = new ErrorDetails(LocalDateTime.now(), errors,
                 "Violação da integridade dos dados", HttpStatus.BAD_REQUEST);
+
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                .body(errorDetails);
+    }
+
+    @ExceptionHandler(UserAlreadyExistsException.class)
+    public ResponseEntity<ErrorDetails> handleUserAlreadyExistsException(UserAlreadyExistsException ex) {
+        List<String> errors = new ArrayList<>();
+        errors.add(ex.getMessage());
+
+        ErrorDetails errorDetails = new ErrorDetails(LocalDateTime.now(), errors,
+                "Username or email is already being used", HttpStatus.BAD_REQUEST);
+
         return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                 .body(errorDetails);
     }
