@@ -6,7 +6,7 @@ import br.com.quattys.backend.domain.entity.Profile;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", uses = {AddressMapper.class})
 public interface ProfileMapper {
 
 

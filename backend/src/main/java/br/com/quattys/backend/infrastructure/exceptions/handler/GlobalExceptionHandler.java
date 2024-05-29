@@ -53,7 +53,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         errors.add(ex.getMessage());
 
         ErrorDetails errorDetails = new ErrorDetails(LocalDateTime.now(), errors,
-                "The resource is not registered", HttpStatus.BAD_REQUEST);
+                "The resource is not registered", HttpStatus.NO_CONTENT);
 
         return ResponseEntity.status(HttpStatus.NO_CONTENT)
                 .body(errorDetails);
