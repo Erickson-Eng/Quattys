@@ -3,6 +3,7 @@ package br.com.quattys.backend.domain.service.impl;
 import br.com.quattys.backend.domain.builders.UserBuilder;
 import br.com.quattys.backend.domain.entity.User;
 import br.com.quattys.backend.domain.service.UserService;
+import br.com.quattys.backend.infrastructure.exceptions.NotFoundException;
 import br.com.quattys.backend.infrastructure.exceptions.UserAlreadyExistsException;
 import br.com.quattys.backend.infrastructure.persitence.UserRepository;
 import lombok.AllArgsConstructor;
@@ -14,8 +15,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 @AllArgsConstructor(onConstructor = @__(@Autowired))
@@ -42,8 +41,9 @@ public class UserServiceImpl implements UserService, UserBuilder {
     }
 
     @Override
-    public List<User> getUserByUsername(String username) {
-        return userRepository.findByUsernameContainingIgnoreCase(username);
+    public User getUserByUsername(String username) {
+        var optionalUser = userRepository.findByUsername(username);
+        return optionalUser.orElseThrow(() -> new NotFoundException("User not found :" + username));
     }
 
     @Override

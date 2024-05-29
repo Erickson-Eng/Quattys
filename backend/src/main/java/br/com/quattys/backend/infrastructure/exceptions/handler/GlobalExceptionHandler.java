@@ -1,5 +1,6 @@
 package br.com.quattys.backend.infrastructure.exceptions.handler;
 
+import br.com.quattys.backend.infrastructure.exceptions.NotFoundException;
 import br.com.quattys.backend.infrastructure.exceptions.UserAlreadyExistsException;
 import br.com.quattys.backend.infrastructure.exceptions.message.ErrorDetails;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -43,6 +44,18 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
                 "Username or email is already being used", HttpStatus.BAD_REQUEST);
 
         return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                .body(errorDetails);
+    }
+
+    @ExceptionHandler(NotFoundException.class)
+    public ResponseEntity<ErrorDetails> handleNotFoundException(NotFoundException ex) {
+        List<String> errors = new ArrayList<>();
+        errors.add(ex.getMessage());
+
+        ErrorDetails errorDetails = new ErrorDetails(LocalDateTime.now(), errors,
+                "The resource is not registered", HttpStatus.BAD_REQUEST);
+
+        return ResponseEntity.status(HttpStatus.NO_CONTENT)
                 .body(errorDetails);
     }
 
