@@ -1,0 +1,59 @@
+<app-toolbar></app-toolbar>
+
+<main>
+  <div class="container">
+    <header class="profile-header">
+      <div class="profile-picture">
+        <img src="assets/3d_avatar_21.png" alt="Imagem de Perfil" />
+      </div>
+      <div class="profile-info">
+        <div class="profile-info-personal">
+          <span class="realname">Rodolfo Santos | Eletricista </span>
+          <span class="username">{{ username }}</span>
+        </div>
+
+        <div class="profile-bio">
+          <p>
+            {{ bio }}
+          </p>
+        </div>
+
+        <div class="profile-stats">
+          <div class="stat">
+            <span class="stat-number">0</span>
+            <span class="stat-label">postagens</span>
+          </div>
+          <div class="stat">
+            <span class="stat-number">456k</span>
+            <span class="stat-label">seguidores</span>
+          </div>
+          <div class="stat">
+            <span class="stat-number">789</span>
+            <span class="stat-label">seguindo</span>
+          </div>
+        </div>
+        <div class="buttons-profile">
+          <button mat-flat-button color="accent" class="profile-button">
+            Seguir
+          </button>
+          <button mat-flat-button color="accent" class="profile-button">
+            Mensagem
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <mat-tab-group>
+      <mat-tab label="Publicações">
+        <section class="profile-posts">
+          <div class="post-grid">
+            <div class="post"></div>
+          </div>
+        </section>
+      </mat-tab>
+      <mat-tab label="Estatisticas"></mat-tab>
+      <mat-tab label="Comunidades"></mat-tab>
+      <mat-tab label="Desafios"></mat-tab>
+    </mat-tab-group>
+  </div>
+</main>

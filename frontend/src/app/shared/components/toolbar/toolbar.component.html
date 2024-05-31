@@ -19,10 +19,22 @@
           <span>Comunidade</span>
         </button>
       </mat-menu>
-      <span><img src="assets/logo.png" alt="logo" /></span>
-      <button mat-icon-button aria-label="Example icon button with a menu icon">
+      <div class="image-container">
+        <img src="assets/logo.png" alt="logo" (click)="navigateToHome()" />
+      </div>
+
+      <button
+        mat-icon-button
+        [matMenuTriggerFor]="afterMenu"
+        aria-label="Icone do perfil">
         <mat-icon>account_circle</mat-icon>
       </button>
+      <mat-menu #afterMenu="matMenu" xPosition="after">
+        <button mat-menu-item (click)="navigateToProfile()">
+          Visualizar perfil
+        </button>
+        <button mat-menu-item (click)="navigateToHome()">Editar perfil</button>
+      </mat-menu>
     </div>
   </mat-toolbar>
 </header>

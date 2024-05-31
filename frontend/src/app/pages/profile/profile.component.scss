@@ -1,0 +1,115 @@
+main {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  width: 100vw;
+  max-width: 1280px;
+  height: 100%;
+  background-color: #1C1B1F;
+}
+
+.profile-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  margin: 0 auto;
+  width: 480px;
+}
+
+
+.profile-picture {
+  padding: 16px;
+
+  img {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    border: 1px solid #c1c1c1;
+  }
+
+}
+
+
+.profile-info {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.profile-actions {
+  width: 100%;
+  display: flex;
+  align-items: start;
+  gap: 20px;
+}
+
+.profile-info-personal{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 4px;
+}
+
+.realname{
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+.username{
+  font-style: italic;
+  font-weight: 400;
+  font-size: 0.7rem;
+}
+
+.profile-bio {
+  font-weight: 300;
+  font-size: 0.8rem;
+  max-height: 80px;
+}
+
+
+.profile-stats {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.stat-number {
+  font-weight: bold;
+}
+
+
+.buttons-profile{
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  padding: 16px;
+}
+
+.buttons-profile {
+  display: flex;
+  gap: 10px; /* Espaçamento entre os botões */
+}
+
+.profile-button {
+  flex: 1; /* Garante que todos os botões tenham o mesmo tamanho */
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  text-align: center;
+}
