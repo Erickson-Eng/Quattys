@@ -1,0 +1,22 @@
+header mat-toolbar {
+  .toolbar__content {
+    display: flex;
+    justify-content: space-between; // Centraliza os itens na barra de ferramentas
+    align-items: center;
+    width: 100vw;
+    max-width: 1280px;
+    margin: 0 auto;// Garante que a barra de ferramentas ocupe toda a largura da tela
+  }
+
+  .toolbar-content {
+    max-width: 1280px;
+  }
+}
+
+
+@media (max-width: 1280px) {
+  header mat-toolbar {
+    justify-content: space-between; // Alinha os itens nas extremidades
+    padding: 0 20px; // Adiciona um padding nas extremidades
+  }
+}

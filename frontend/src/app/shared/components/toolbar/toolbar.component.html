@@ -1,0 +1,28 @@
+<header>
+  <mat-toolbar class="toolbar" color="primary">
+    <div class="toolbar__content">
+      <button
+        mat-icon-button
+        [matMenuTriggerFor]="lateralMenu"
+        class="example-icon"
+        aria-label="Example icon-button with menu icon"
+      >
+        <mat-icon>menu</mat-icon>
+      </button>
+      <mat-menu #lateralMenu="matMenu">
+        <button mat-menu-item>
+          <mat-icon>fitness_center</mat-icon>
+          <span>Ginásio</span>
+        </button>
+        <button mat-menu-item>
+          <mat-icon>group</mat-icon>
+          <span>Comunidade</span>
+        </button>
+      </mat-menu>
+      <span><img src="assets/logo.png" alt="logo" /></span>
+      <button mat-icon-button aria-label="Example icon button with a menu icon">
+        <mat-icon>account_circle</mat-icon>
+      </button>
+    </div>
+  </mat-toolbar>
+</header>

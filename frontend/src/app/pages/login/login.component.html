@@ -1,0 +1,100 @@
+<main>
+  <div class="container">
+    <div class="form-container">
+      <form
+        class="form form-login"
+        [formGroup]="loginForm"
+        (ngSubmit)="submitLogin()"
+      >
+        <div class="login-header">
+          <img src="assets/logo-3.png" alt="" />
+        </div>
+        <div class="form-inputs">
+          <mat-form-field appearance="outline" color="primary">
+            <mat-label>Nome de usuário</mat-label>
+            <input matInput type="text" formControlName="username" />
+            @if (loginForm.get('username')?.invalid &&
+            loginForm.get('username')?.touched){
+            <mat-error> Campo obrigatorio e minimo de 3 caracteres </mat-error>
+            }
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" color="primary">
+            <mat-label>Senha</mat-label>
+            <input matInput type="password" formControlName="password" />
+            @if (loginForm.get('password')?.invalid &&
+            loginForm.get('password')?.touched){
+            <mat-error> Campo obrigatorio </mat-error>
+            }
+          </mat-form-field>
+        </div>
+        <div class="form-actions">
+          <button
+            mat-stroked-button
+            color="primary"
+            type="submit"
+            [disabled]="loginForm.invalid"
+          >
+            Login
+          </button>
+          <a mat-button href="#" class="form-link">Esqueceu a senha?</a>
+        </div>
+      </form>
+
+      <form
+        class="form form-register"
+        [formGroup]="registerForm"
+        (ngSubmit)="submitRegister()"
+      >
+        <div class="login-header">
+          <img src="assets/logo-3.png" alt="" />
+        </div>
+        <div class="form-inputs">
+          <mat-form-field appearance="outline" color="primary">
+            <mat-label>Nome de usuário</mat-label>
+            <input matInput type="text" formControlName="username" />
+            @if (registerForm.get('username')?.invalid &&
+            registerForm.get('username')?.touched){
+            <mat-error> Campo obrigatorio e minimo de 3 caracteres </mat-error>
+            }
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" color="primary">
+            <mat-label>Senha</mat-label>
+            <input matInput type="password" formControlName="password" />
+            @if (registerForm.get('password')?.invalid &&
+            registerForm.get('password')?.touched){
+            <mat-error> Campo obrigatorio </mat-error>
+            }
+          </mat-form-field>
+          <mat-form-field appearance="outline" color="primary">
+            <mat-label>Email</mat-label>
+            <input matInput type="email" formControlName="email" />
+            @if (registerForm.get('email')?.invalid &&
+            registerForm.get('email')?.touched){
+            <mat-error>Informe um email valido! </mat-error>
+            }
+          </mat-form-field>
+          <mat-form-field appearance="outline" color="primary">
+            <mat-label>Telefone</mat-label>
+            <input matInput type="text" formControlName="phone" />
+            @if (registerForm.get('phone')?.invalid &&
+            registerForm.get('phone')?.touched){
+            <mat-error> Telefone somente números </mat-error>
+            }
+          </mat-form-field>
+        </div>
+        <div class="form-actions">
+          <button
+            mat-stroked-button
+            color="primary"
+            type="submit"
+            [disabled]="registerForm.invalid"
+          >
+            Registrar
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</main>
